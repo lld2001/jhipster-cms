@@ -10,7 +10,7 @@
         <router-link :to="{ name: 'PostCreate' }" custom v-slot="{ navigate }">
           <button @click="navigate" id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-post">
             <font-awesome-icon icon="plus"></font-awesome-icon>
-            <span v-text="$t('cmsApp.post.home.createLabel')"> Create a new Post </span>
+            <span v-text="$t('cmsApp.post.home.createLabel')">Create a new Post</span>
           </button>
         </router-link>
       </div>
@@ -52,7 +52,9 @@
               <router-link :to="{ name: 'PostView', params: { postId: post.id } }">{{ post.id }}</router-link>
             </td>
             <td>{{ post.title }}</td>
-            <td>{{ post.content }}</td>
+            <td>
+              <span :inner-html.prop="post.content"></span>
+            </td>
             <td>{{ post.date ? $d(Date.parse(post.date), 'short') : '' }}</td>
             <td>
               <div v-if="post.blog">
@@ -95,16 +97,15 @@
           @infinite="loadMore"
           force-use-infinite-wrapper=".el-table__body-wrapper"
           :distance="20"
-        >
-        </infinite-loading>
+        ></infinite-loading>
       </table>
     </div>
     <b-modal ref="removeEntity" id="removeEntity">
-      <span slot="modal-title"
-        ><span id="cmsApp.post.delete.question" data-cy="postDeleteDialogHeading" v-text="$t('entity.delete.title')"
+      <span slot="modal-title">
+        <span id="cmsApp.post.delete.question" data-cy="postDeleteDialogHeading" v-text="$t('entity.delete.title')"
           >Confirm delete operation</span
-        ></span
-      >
+        >
+      </span>
       <div class="modal-body">
         <p id="jhi-delete-post-heading" v-text="$t('cmsApp.post.delete.question', { id: removeId })">
           Are you sure you want to delete this Post?

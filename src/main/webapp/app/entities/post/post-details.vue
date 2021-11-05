@@ -16,7 +16,7 @@
             <span v-text="$t('cmsApp.post.content')">Content</span>
           </dt>
           <dd>
-            <span>{{ post.content }}</span>
+            <span :inner-html.prop="post.content"></span>
           </dd>
           <dt>
             <span v-text="$t('cmsApp.post.date')">Date</span>
